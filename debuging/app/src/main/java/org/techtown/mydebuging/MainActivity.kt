@@ -1,17 +1,20 @@
 package org.techtown.mydebuging
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
+import org.techtown.mydebuging.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val helloTextView: TextView = findViewById(R.id.division_textview)
         var count = 0
@@ -40,5 +43,6 @@ class MainActivity : AppCompatActivity() {
             denominator--
         }
     }
+
 }
 

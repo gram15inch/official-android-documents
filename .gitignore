@@ -1,30 +1,22 @@
-# Gradle files
-.gradle/
-build/
 
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
-
-# IntelliJ
-*.iml
-.idea/
-
-# Keystore files
-*.jks
-*.keystore
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
+debuging/app/src/main/java/org/techtown/mydebuging/MainActivity.kt
+debuging/.idea/compiler.xml
+.gitattributes
+debuging/.idea/.name
+debuging/.idea/gradle.xml
+debuging/.idea/misc.xml
+debuging/.idea/vcs.xml
+debuging/app/build.gradle
+debuging/app/src/main/java/org/techtown/mydebuging/MainActivity.kt
+debuging/app/src/main/res/layout/activity_main.xml
+debuging/app/src/main/res/values/strings.xml
+.gitattributes
+debuging/app/build.gradle
+debuging/app/src/main/java/org/techtown/mydebuging/MainActivity.kt
+debuging/app/src/main/res/layout/activity_main.xml
+debuging/app/src/main/res/values/strings.xml
+debuging/app/src/main/res/values/strings.xml
+debuging/app/src/main/res/layout/activity_main.xml
+debuging/app/src/main/java/org/techtown/mydebuging/MainActivity.kt
+debuging/app/build.gradle
+.gitattributes

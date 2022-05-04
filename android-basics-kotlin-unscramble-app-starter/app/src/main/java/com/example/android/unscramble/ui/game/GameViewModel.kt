@@ -28,10 +28,6 @@ class GameViewModel : ViewModel(){
         Log.d("GameFragment", "GameViewModel created!")
         getNextWord()
     }
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("GameFragment", "GameViewModel destroyed!")
-    }
 
     private fun getNextWord() {
         currentWord = allWordsList.random()

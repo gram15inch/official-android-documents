@@ -23,44 +23,43 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.cupcake.databinding.FragmentPickupBinding
+import com.example.cupcake.databinding.FragmentFlavorBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
- * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
+ * [FlavorFragment] allows a user to choose a cupcake flavor for the order.
  */
-class PickupFragment : Fragment() {
+class FlavorFragment : Fragment() {
 
-    // Binding object instance corresponding to the fragment_pickup.xml layout
+    // Binding object instance corresponding to the fragment_flavor.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var binding: FragmentPickupBinding? = null
+    private var binding: FragmentFlavorBinding? = null
     private val sharedViewModel: OrderViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentFlavorBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding?.apply {
-            viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
-            nextButton.setOnClickListener { goToNextScreen() }
+            viewModel = sharedViewModel
+            flavorFragment = this@FlavorFragment
         }
     }
 
     /**
-     * Navigate to the next screen to see the order summary.
+     * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)}
+        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment) }
 
     /**
      * This fragment lifecycle method is called when the view hierarchy associated with the fragment

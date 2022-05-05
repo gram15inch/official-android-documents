@@ -46,11 +46,12 @@ class OrderViewModel : ViewModel() {
         updatePrice()
     }
 
+
+    // 헬퍼 메서드
+
     fun hasNoFlavorSet(): Boolean {
         return _flavor.value.isNullOrEmpty()
     }
-
-    // 헬퍼 메서드
 
     private fun getPickupOptions(): List<String> {
         val options = mutableListOf<String>()

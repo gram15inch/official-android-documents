@@ -55,18 +55,19 @@ class FlavorFragment : Fragment() {
         }
     }
 
-    /**
-     * Navigate to the next screen to choose pickup date.
-     */
-    fun goToNextScreen() {
-        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment) }
 
-    /**
-     * This fragment lifecycle method is called when the view hierarchy associated with the fragment
-     * is being removed. As a result, clear out the binding object.
-     */
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    fun goToNextScreen() {
+        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment) }
+
+    fun cancelOrder() {
+        sharedViewModel.resetOrder()
+        findNavController().navigate(R.id.action_flavorFragment_to_startFragment)
     }
 }

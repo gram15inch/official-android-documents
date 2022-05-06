@@ -21,6 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 
+
 /**
  * Activity for cupcake order flow.
  */
@@ -40,4 +41,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+
 }

@@ -34,11 +34,11 @@ class OrderViewModel : ViewModel() {
 
     fun setQuantity(numberCupcakes: Int) {
         _quantity.value = numberCupcakes
+        updatePrice()
     }
 
     fun setFlavor(desiredFlavor: String) {
         _flavor.value = desiredFlavor
-        updatePrice()
     }
 
     fun setDate(pickupDate: String) {
@@ -74,8 +74,11 @@ class OrderViewModel : ViewModel() {
     }
 
     fun resetOrder() {
+        val formatter = SimpleDateFormat("E MMM d", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+
         _quantity.value = 0
-        _date.value =""
+        _date.value = ""
         _flavor.value =""
         _price.value = 0.0
     }

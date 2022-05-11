@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.inventory
+package com.example.inventory.fragment
 
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
@@ -25,6 +25,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventory.InventoryApplication
+import com.example.inventory.InventoryViewModel
+import com.example.inventory.InventoryViewModelFactory
 import com.example.inventory.data.Item
 import com.example.inventory.databinding.FragmentAddItemBinding
 

@@ -18,6 +18,7 @@ package com.example.inventory.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,34 +35,43 @@ import com.example.inventory.data.getFormattedPrice
 import com.example.inventory.databinding.FragmentItemDetailBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
+
+const val TAG = "ItemDetailFragment"
 /**
  * [ItemDetailFragment] displays the details of the selected item.
  */
 class ItemDetailFragment : Fragment() {
-    private val navigationArgs: ItemDetailFragmentArgs by navArgs()
 
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
 
-
+    private val navigationArgs: ItemDetailFragmentArgs by navArgs()
+    private val viewModel: InventoryViewModel by activityViewModels {
+        InventoryViewModelFactory((activity?.application as InventoryApplication).database.itemDao())
+    }
     lateinit var item: Item
 
-    private val viewModel: InventoryViewModel by activityViewModels {
-        InventoryViewModelFactory(
-            (activity?.application as InventoryApplication).database.itemDao()
-        )
-    }
 
     private fun bind(item: Item) {
         binding.apply {
             itemName.text = item.itemName
             itemPrice.text = item.getFormattedPrice()
             itemCount.text = item.quantityInStock.toString()
-            sellItem.setOnClickListener { viewModel.sellItem(item) }
+            sellItem.isEnabled = viewModel.isStockAvailable(item)
+            sellItem.setOnClickListener { viewModel.sellItem(item)}
+            deleteItem.setOnClickListener { showConfirmationDialog()}
+            editItem.setOnClickListener { editItem() }
+
         }
 
     }
-
+    private fun editItem() {
+        val action = ItemDetailFragmentDirections.actionItemDetailFragmentToAddItemFragment(
+            getString(R.string.edit_fragment_title),
+            item.id
+        )
+        this.findNavController().navigate(action)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,11 +86,14 @@ class ItemDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = navigationArgs.itemId
+
         viewModel.retrieveItem(id).observe(this.viewLifecycleOwner) {selectedItem ->
             item = selectedItem
             bind(item)
+            Log.d(TAG,"bind_item = ${item.id}")
         }
     }
+
 
     private fun showConfirmationDialog() {
         MaterialAlertDialogBuilder(requireContext())
@@ -94,16 +107,13 @@ class ItemDetailFragment : Fragment() {
             .show()
     }
 
-    /**
-     * Deletes the current item and navigates to the list fragment.
-     */
+
     private fun deleteItem() {
+        viewModel.deleteItem(item)
         findNavController().navigateUp()
     }
 
-    /**
-     * Called when fragment is destroyed.
-     */
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

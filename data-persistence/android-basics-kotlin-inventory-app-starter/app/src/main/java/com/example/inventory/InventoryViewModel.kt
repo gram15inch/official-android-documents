@@ -20,7 +20,11 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             itemDao.update(item)
         }
     }
-
+    fun deleteItem(item: Item) {
+        viewModelScope.launch {
+            itemDao.delete(item)
+        }
+    }
     private fun getNewItemEntry(itemName: String, itemPrice: String, itemCount: String): Item {
         return Item(
             itemName = itemName,
@@ -51,10 +55,14 @@ class InventoryViewModel(private val itemDao: ItemDao) : ViewModel() {
             updateItem(newItem)
         }
     }
+    fun isStockAvailable(item: Item): Boolean {
+        return (item.quantityInStock > 0)
+    }
 }
+
+/* 뷰모델 팩토리는 대부분 비슷하므로 다른 곳에서 재사용 가능*/
 class InventoryViewModelFactory(private val itemDao: ItemDao) : ViewModelProvider.Factory {
 
-    /* 뷰모델 팩토리는 대부분 비슷하므로 다른 곳에서 재사용 가능*/
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         // 뷰모델 클레스부분만 수정

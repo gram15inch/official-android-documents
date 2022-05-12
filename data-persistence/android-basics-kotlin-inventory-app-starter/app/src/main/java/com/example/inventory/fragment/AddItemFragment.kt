@@ -36,12 +36,12 @@ import com.example.inventory.databinding.FragmentAddItemBinding
  */
 class AddItemFragment : Fragment() {
 
-    private val navigationArgs: ItemDetailFragmentArgs by navArgs()
+    //private val navigationArgs: ItemDetailFragmentArgs by navArgs()
 
     private var _binding: FragmentAddItemBinding? = null
     private val binding get() = _binding!!
 
-    // 대부분의 뷰모델 생성방식이 같으므로 아래 코드르 재사용 가능
+    // 대부분의 뷰모델 생성방식이 같으므로 아래 코드를 재사용 가능
     private val viewModel: InventoryViewModel by activityViewModels {
         InventoryViewModelFactory(
             (activity?.application as InventoryApplication).database
@@ -50,14 +50,6 @@ class AddItemFragment : Fragment() {
     }
     lateinit var item: Item
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentAddItemBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     private fun isEntryValid(): Boolean {
         return viewModel.isEntryValid(
@@ -78,6 +70,16 @@ class AddItemFragment : Fragment() {
         val action = AddItemFragmentDirections.actionAddItemFragmentToItemListFragment()
         findNavController().navigate(action)
 
+    }
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentAddItemBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

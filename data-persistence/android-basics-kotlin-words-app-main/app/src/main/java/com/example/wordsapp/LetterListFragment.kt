@@ -71,6 +71,7 @@ class LetterListFragment : Fragment() {
         SettingsDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner, { value ->
             isLinearLayoutManager = value
             chooseLayout()
+            activity?.invalidateOptionsMenu()
         })
         // Sets the LayoutManager of the recyclerview
         // On the first run of the app, it will be LinearLayoutManager
@@ -112,8 +113,8 @@ class LetterListFragment : Fragment() {
 
         menuItem.icon =
             if (isLinearLayoutManager)
-                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
-            else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
+                ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_linear_layout)
+            else ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
     }
 
     /**
@@ -131,7 +132,7 @@ class LetterListFragment : Fragment() {
                 lifecycleScope.launch {
                     // 레이아웃 상태 dataStore 에 저장
                     SettingsDataStore.saveLayoutToPreferencesStore(isLinearLayoutManager, requireContext())
-                    activity?.invalidateOptionsMenu()
+                    //activity?.invalidateOptionsMenu() -> 아이콘 업데이트 위치 옵저버로 옮김
                 }
                 return true
             }

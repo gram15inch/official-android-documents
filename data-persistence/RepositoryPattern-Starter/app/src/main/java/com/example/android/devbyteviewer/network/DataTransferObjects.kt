@@ -54,7 +54,7 @@ data class NetworkVideo(
 
 /**
  * Convert Network results to database objects
- */
+ */ // 레포지토리 사용전 네트워크데이터를 바로 도메인으로 변환
 fun NetworkVideoContainer.asDomainModel(): List<DevByteVideo> {
     return videos.map {
         DevByteVideo(
@@ -69,7 +69,7 @@ fun NetworkVideoContainer.asDomainModel(): List<DevByteVideo> {
 
 /**
  * Convert Network results to database objects
- */
+ */ // 레포지토리 사용후 룸에서 꺼내기위해 네트워크데이터를 엔티티로 변환
 fun NetworkVideoContainer.asDatabaseModel(): List<DatabaseVideo> {
     return videos.map {
         DatabaseVideo(
